@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AmbassadorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,8 @@ Route::prefix('admin')->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);
         Route::put('users/info', [AuthController::class, 'updateInfo']);
         Route::put('users/password', [AuthController::class, 'updatePassword']);
+
+        Route::get('ambassadors', [AmbassadorController::class, 'index']);
     });
 });
 
