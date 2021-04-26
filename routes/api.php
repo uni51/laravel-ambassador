@@ -24,7 +24,7 @@ function common(string $scope)
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
 
-    Route::middleware(['auth:sanctum', 'scope.$scope'])->group(function () {
+    Route::middleware(['auth:sanctum', $scope])->group(function () {
         Route::get('user', [AuthController::class, 'user']);
         Route::post('logout', [AuthController::class, 'logout']);
         Route::put('users/info', [AuthController::class, 'updateInfo']);
@@ -34,7 +34,7 @@ function common(string $scope)
 
 // Admin
 Route::prefix('admin')->group(function () {
-    common('scope: admin');
+    common('scope.admin');
 
     Route::middleware(['auth:sanctum', 'scope.admin'])->group(function () {
         Route::get('ambassadors', [AmbassadorController::class, 'index']);
@@ -47,7 +47,7 @@ Route::prefix('admin')->group(function () {
 
 // Ambassador
 Route::prefix('ambassador')->group(function () {
-    common('scope: ambassador');
+    common('scope.ambassador');
 });
 
 // Checkout
