@@ -41,11 +41,22 @@ class ProductController extends Controller
 
     public function frontend()
     {
-        return Product::all();
+        if ($products = \Cache::get('products_frontend')) {
+            return $products;
+        }
+
+        sleep(2);
+        $products = Product::all();
+
+        \Cache::set('products_frontend', $products, 30*60); // 30 min
+
+        return $products;
     }
 
     public function backend()
     {
-        return Product::paginate();
+        return \Cache::remember('products_backend', 30 * 60, function() {
+            return Product::paginate();
+        });
     }
 }
