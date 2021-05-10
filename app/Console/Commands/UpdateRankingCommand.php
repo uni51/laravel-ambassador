@@ -15,11 +15,6 @@ class UpdateRankingCommand extends Command
      */
     protected $signature = 'update:rankings';
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
     public function handle()
     {
         $ambassadors = User::ambassadors()->get();
